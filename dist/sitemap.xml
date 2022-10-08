@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://localhost:8080/author/len/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/about/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/release-v1-1-0/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/why-you-need-https/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/what-is-web-governance-and-why-you-need-it/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/pii-data-leaks-a-dangerous-situation/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/tag/news/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/tag/release/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/tag/security/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/tag/web-management/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/404.html</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/_headers</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/.htaccess</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/_redirects</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://localhost:8080/robots.txt</loc>
+    <lastmod>2022-10-08</lastmod>
+  </url>
+</urlset>
