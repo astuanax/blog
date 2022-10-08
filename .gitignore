@@ -67,4 +67,4 @@ typings/
 .cache/
 yarn-error.log
 .netlify/
-dist
+
