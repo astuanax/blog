@@ -1,0 +1,34 @@
+---
+layout: layouts/home.njk
+---
+{% set maxPosts = collections.posts.length | min(3) %}
+
+<div class="container mx-auto">
+{% set postslist = blogposts | head(-1) %}
+{% include "postslist.njk" %}
+</div>
+
+<div class="pt-3">
+<h3 class="text-center text-primary tracking-tight border-r-2 border-l-2 border-primary bg-white pl-2 ">
+More blogposts from the archive
+</h3>
+</div>
+<div class="container mx-auto">
+{% set postsolist = blogposts | poplast %}
+<ul class="list-inside py-6">
+{% for post in postsolist | reverse %}
+  <li class="px-3 py-6 hover:bg-blend-multiply hover:shadow-secondary hover:shadow-sm hover:bg-white postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+    {% include "partials/h4.njk" %}
+    {% for desc in post.description | poplast %}
+        <p class="">{{desc}}.</p>
+      {% endfor %}
+      {% for desc in post.description | head(-1) %}
+        <p class="pb-3"><a  title="{{post.title}}" class="text-info hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-info hover:via-secondary hover:to-primary underline" href="/posts/{{post.slug}}">{{desc}}</a>.</p>
+    {% endfor %}
+    <div class="float-none text-gray-800 text-sm pb-6">Posted {% if post.tags.length > 0 %}in /{{post.tags}}/{% endif %} on {{ post.date | readableDate}}</div>
+  </li>
+  </li>
+{% endfor %}
+</ul>
+</div>
+

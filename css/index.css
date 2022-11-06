@@ -1,0 +1,88 @@
+@config "./tailwindcss-config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind colors;
+
+html {
+  font-size: 20px;
+}
+
+@layer base {
+  .hero {
+    @apply text-6xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  h4 {
+    @apply text-xl;
+  }
+}
+
+@layer components {
+  /*h2 + p {*/
+  /*  @apply pt-6;*/
+  /*}*/
+}
+
+body, div {
+  /*background-image:url("/img/bg.png");*/
+}
+
+.postlist-item:hover a.tag {
+    @apply text-info;
+}
+
+.content {
+  @apply bg-white;
+  @apply pb-2;
+}
+
+.content p {
+    @apply pb-2;
+}
+.content h3 {
+  @apply font-semibold;
+  @apply tracking-tight;
+  @apply pt-2;
+  @apply pb-4;
+}
+
+h2, h3 {
+  color: #27111b;
+  font-weight: 900;
+}
+h1, h2, h3, h4, h1 a, h2 a, h3 a, h4 a {
+  @apply font-sans;
+}
+p {
+  font-weight: 400 !important;
+}
+
+.content h4 {
+  @apply tracking-tight;
+  @apply pt-1;
+  @apply pb-3;
+}
+
+.content ul {
+  @apply list-disc;
+  @apply list-inside;
+  @apply pt-1;
+  @apply pb-3;
+}
+
+.content a, .link {
+  @apply text-info;
+  @apply underline;
+  overflow-wrap: break-word;
+}
+
+.content p {
+  @apply pb-8;
+  @apply subpixel-antialiased;
+  @apply tracking-tight;
+  @apply leading-7;
+}

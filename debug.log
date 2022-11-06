@@ -1,0 +1,5 @@
+
+> eleventy-base-blog@7.0.0 debug
+> DEBUG=* npx @11ty/eleventy
+
+[11ty] Copied 12 files / Wrote 14 files in 6.28 seconds (448.6ms each, v1.0.2)

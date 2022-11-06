@@ -1,0 +1,16 @@
+{
+  "title": "Sitefig - your site sorted",
+  "url": "https://sitefig.net/",
+  "language": "en",
+  "description": "Sitefig, your site sorted. Website auditing and monitoring.",
+  "feed": {
+    "subtitle": "Your site sorted",
+    "filename": "feed.xml",
+    "path": "/feed/feed.xml",
+    "id": "https://sitefig.net/"
+  },
+  "jsonfeed": {
+    "path": "/feed/feed.json",
+    "url": "https://sitefig.net/feed/feed.json"
+  }
+}

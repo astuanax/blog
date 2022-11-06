@@ -1,0 +1,18 @@
+<div class="postlist pt-4 pb-6">
+{% for post in postslist%}
+<div class="px-3 py-6">
+    <p class="text-gray-800 text-center text-sm">
+    Posted in /{{post.tags}}/ on {{ post.date | readableDate}}
+    </p>
+    {% include "./partials/h2.njk" %}
+    <div class="grid grid-rows-1 grid-flow-col gap-4">
+    <div class="col-span-2">
+      {% include "./partials/description.njk" %}
+    </div>
+    {% if post.image %}
+      <div class="align-middle">{% image post.image.url, post.image.alt %}</div>
+    {% endif %}
+    </div>
+{% endfor %}
+</div>
+

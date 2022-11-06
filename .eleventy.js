@@ -1,211 +1,256 @@
-require("dotenv").config();
-
-const cleanCSS = require("clean-css");
 const fs = require("fs");
-const pluginRSS = require("@11ty/eleventy-plugin-rss");
-const localImages = require("eleventy-plugin-local-images");
-const lazyImages = require("eleventy-plugin-lazyimages");
-const ghostContentAPI = require("@tryghost/content-api");
 
-const htmlMinTransform = require("./src/transforms/html-min-transform.js");
+const outdent = require('outdent');
 
-// Init Ghost API
-const api = new ghostContentAPI({
-  url: process.env.GHOST_API_URL,
-  key: process.env.GHOST_CONTENT_API_KEY,
-  version: "v2"
-});
+const {DateTime} = require("luxon");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
 
-// Strip Ghost domain from urls
-const stripDomain = url => {
-  return url.replace(process.env.GHOST_API_URL, "");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginNavigation = require("@11ty/eleventy-navigation");
+
+const Image = require('@11ty/eleventy-img');
+const markdownItEleventyImg = require("markdown-it-eleventy-img");
+
+const stringifyAttributes = (attributeMap) => {
+  return Object.entries(attributeMap)
+    .map(([attribute, value]) => {
+      if (typeof value === 'undefined') return '';
+      return `${attribute}="${value}"`;
+    })
+    .join(' ');
 };
 
-module.exports = function(config) {
-  // Minify HTML
-  config.addTransform("htmlmin", htmlMinTransform);
+module.exports = function (eleventyConfig) {
 
-  // Assist RSS feed template
-  config.addPlugin(pluginRSS);
 
-  // Apply performance attributes to images
-  config.addPlugin(lazyImages, {
-    cacheFile: ""
-  });
-
-  // Copy images over from Ghost
-  config.addPlugin(localImages, {
-    distPath: "dist",
-    assetPath: "/assets/images",
-    selector: "img",
-    attribute: "data-src", // Lazy images attribute
-    verbose: false
-  });
-
-  // Inline CSS
-  config.addFilter("cssmin", code => {
-    return new cleanCSS({}).minify(code).styles;
-  });
-
-  config.addFilter("getReadingTime", text => {
-    const wordsPerMinute = 200;
-    const numberOfWords = text.split(/\s/g).length;
-    return Math.ceil(numberOfWords / wordsPerMinute);
-  });
-
-  // Date formatting filter
-  config.addFilter("htmlDateString", dateObj => {
-    return new Date(dateObj).toISOString().split("T")[0];
-  });
-
-  // Don't ignore the same files ignored in the git repo
-  config.setUseGitIgnore(false);
-
-  // Get all pages, called 'docs' to prevent
-  // conflicting the eleventy page object
-  config.addCollection("docs", async function(collection) {
-    collection = await api.pages
-      .browse({
-        include: "authors",
-        limit: "all"
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-    collection.map(doc => {
-      doc.url = stripDomain(doc.url);
-      doc.primary_author.url = stripDomain(doc.primary_author.url);
-
-      // Convert publish date into a Date object
-      doc.published_at = new Date(doc.published_at);
-      return doc;
+  const imageShortcode = async (
+    src,
+    alt,
+    className = undefined,
+    widths = [300, 600],
+    formats = ['png', 'webp'],
+    sizes = '100vw'
+  ) => {
+    const imageMetadata = await Image(src, {
+      widths: [...widths, null],
+      formats: [...formats, null],
+      outputDir: '_site/img',
+      urlPath: '/img',
     });
 
-    return collection;
-  });
+    const sourceHtmlString = Object.values(imageMetadata)
+      // Map each format to the source HTML markup
+      .map((images) => {
+        // The first entry is representative of all the others
+        // since they each have the same shape
+        const {sourceType} = images[0];
 
-  // Get all posts
-  config.addCollection("posts", async function(collection) {
-    collection = await api.posts
-      .browse({
-        include: "tags,authors",
-        limit: "all"
+        // Use our util from earlier to make our lives easier
+        const sourceAttributes = stringifyAttributes({
+          type: sourceType,
+          // srcset needs to be a comma-separated attribute
+          srcset: images.map((image) => image.srcset).join(', '),
+          sizes,
+        });
+
+        // Return one <source> per format
+        return `<source ${sourceAttributes}>`;
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .join('\n');
 
-    collection.forEach(post => {
-      post.url = stripDomain(post.url);
-      post.primary_author.url = stripDomain(post.primary_author.url);
-      post.tags.map(tag => (tag.url = stripDomain(tag.url)));
+    const getLargestImage = (format) => {
+      const images = imageMetadata[format];
+      return images[images.length - 1];
+    }
 
-      // Convert publish date into a Date object
-      post.published_at = new Date(post.published_at);
+    const largestUnoptimizedImg = getLargestImage(formats[0]);
+    const imgAttributes = stringifyAttributes({
+      src: largestUnoptimizedImg.url,
+      width: largestUnoptimizedImg.width,
+      height: largestUnoptimizedImg.height,
+      alt,
+      loading: 'lazy',
+      decoding: 'async',
     });
+    const imgHtmlString = `<img ${imgAttributes}>`;
 
-    // Bring featured post to the top of the list
-    collection.sort((post, nextPost) => nextPost.featured - post.featured);
-
-    return collection;
-  });
-
-  // Get all authors
-  config.addCollection("authors", async function(collection) {
-    collection = await api.authors
-      .browse({
-        limit: "all"
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-    // Get all posts with their authors attached
-    const posts = await api.posts
-      .browse({
-        include: "authors",
-        limit: "all"
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-    // Attach posts to their respective authors
-    collection.forEach(async author => {
-      const authorsPosts = posts.filter(post => {
-        post.url = stripDomain(post.url);
-        return post.primary_author.id === author.id;
-      });
-      if (authorsPosts.length) author.posts = authorsPosts;
-
-      author.url = stripDomain(author.url);
+    const pictureAttributes = stringifyAttributes({
+      class: className,
     });
+    const picture = `<picture ${pictureAttributes}>
+    ${sourceHtmlString}
+    ${imgHtmlString}
+  </picture>`;
 
-    return collection;
+    return outdent`${picture}`;
+  };
+
+  eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode);
+
+
+  // Copy the `img` and `css` folders to the output
+  eleventyConfig.addPassthroughCopy("img");
+
+  // Add plugins
+  eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPlugin(pluginNavigation);
+
+  eleventyConfig.addFilter("readableDate", dateObj => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
   });
 
-  // Get all tags
-  config.addCollection("tags", async function(collection) {
-    collection = await api.tags
-      .browse({
-        include: "count.posts",
-        limit: "all"
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-    // Get all posts with their tags attached
-    const posts = await api.posts
-      .browse({
-        include: "tags,authors",
-        limit: "all"
-      })
-      .catch(err => {
-        console.error(err);
-      });
-
-    // Attach posts to their respective tags
-    collection.forEach(async tag => {
-      const taggedPosts = posts.filter(post => {
-        post.url = stripDomain(post.url);
-        return post.primary_tag && post.primary_tag.slug === tag.slug;
-      });
-      if (taggedPosts.length) tag.posts = taggedPosts;
-
-      tag.url = stripDomain(tag.url);
-    });
-
-    return collection;
+  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
   });
 
-  // Display 404 page in BrowserSnyc
-  config.setBrowserSyncConfig({
+  eleventyConfig.addFilter("poplast", (array) => {
+    const last = array.length - 1
+    return array.slice(0, last)
+  });
+
+  eleventyConfig.addFilter("popfirst", (array, n) => {
+    // const last = array.length - 1
+    return array.slice(1, array.length)
+  });
+
+  // Get the first `n` elements of a collection.
+  eleventyConfig.addFilter("head", (array, n) => {
+    if (!Array.isArray(array) || array.length === 0) {
+      return [];
+    }
+    if (n < 0) {
+      return array.slice(n);
+    }
+    if (n >= array.length) {
+      n = array.length
+    }
+    return array.slice(0, n);
+  });
+
+
+  // Get the first `n` elements of a collection.
+  eleventyConfig.addFilter("news", (array) => {
+    if (!Array.isArray(array) || array.length === 0) {
+      return [];
+    }
+    return array.filter(post => post.tags.includes("news"))
+  });
+
+  // Return the smallest number argument
+  eleventyConfig.addFilter("min", (...numbers) => {
+    return Math.min.apply(null, numbers);
+  });
+
+
+  function filterTagList(tags) {
+    return (tags || []).filter(tag => ["all", "nav", "post", "posts", "news", "tech"].indexOf(tag) === -1);
+  }
+
+  eleventyConfig.addFilter("filterTagList", filterTagList)
+
+  // Create an array of all tags
+
+
+  eleventyConfig.addCollection("tagList", function (collection) {
+    return [
+      { "name": "news"}, { "name": "tech"}, ];
+  });
+
+  // Customize Markdown library and settings:
+  let markdownLibrary = markdownIt({
+    html: true,
+    linkify: true
+  }).use(markdownItAnchor, {
+    permalink: markdownItAnchor.permalink.ariaHidden({
+      placement: "after",
+      class: "direct-link",
+      symbol: "#"
+    }),
+    level: [1, 2, 3, 4],
+    slugify: eleventyConfig.getFilter("slugify")
+  }).use(markdownItEleventyImg, {
+    imgOptions: {
+      widths: [300, 600],
+      formats: ['png', 'webp'],
+      outputDir: '_site/img',
+      urlPath: '/img',
+      formats: ["avif", "webp", "png"]
+    },
+    globalAttributes: {
+      class: "markdown-image",
+      decoding: "async",
+      // If you use multiple widths,
+      // don't forget to add a `sizes` attribute.
+      sizes: "100vw"
+    }, renderImage(image, attributes) {
+      const [src, attrs] = attributes;
+
+      const root = "http://localhost:1337" // should be .env var
+      return imageShortcode(root + src, attrs.alt)
+
+    }
+  });
+  eleventyConfig.setLibrary("md", markdownLibrary);
+
+  // Override Browsersync defaults (used only with --serve)
+  eleventyConfig.setBrowserSyncConfig({
     callbacks: {
-      ready: (err, bs) => {
-        const content_404 = fs.readFileSync("dist/404.html");
+      ready: function (err, browserSync) {
+        const content_404 = fs.readFileSync('_site/404.html');
 
-        bs.addMiddleware("*", (req, res) => {
+        browserSync.addMiddleware("*", (req, res) => {
           // Provides the 404 content without redirect.
+          res.writeHead(404, {"Content-Type": "text/html; charset=UTF-8"});
           res.write(content_404);
           res.end();
         });
-      }
-    }
+      },
+    },
+    ui: false,
+    ghostMode: false
   });
 
-  // Eleventy configuration
-  return {
-    dir: {
-      input: "src",
-      output: "dist"
-    },
 
-    // Files read by Eleventy, add as needed
-    templateFormats: ["css", "njk", "md", "txt"],
-    htmlTemplateEngine: "njk",
+  return {
+    // Control which files Eleventy will process
+    // e.g.: *.md, *.njk, *.html, *.liquid
+    templateFormats: [
+      "md",
+      "njk",
+      "html",
+      "liquid"
+    ],
+
+    // Pre-process *.md files with: (default: `liquid`)
     markdownTemplateEngine: "njk",
-    passthroughFileCopy: true
+
+    // Pre-process *.html files with: (default: `liquid`)
+    htmlTemplateEngine: "njk",
+
+    // -----------------------------------------------------------------
+    // If your site deploys to a subdirectory, change `pathPrefix`.
+    // Don’t worry about leading and trailing slashes, we normalize these.
+
+    // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
+    // This is only used for link URLs (it does not affect your file structure)
+    // Best paired with the `url` filter: https://www.11ty.dev/docs/filters/url/
+
+    // You can also pass this in on the command line using `--pathprefix`
+
+    // Optional (default is shown)
+    pathPrefix: "/",
+    // -----------------------------------------------------------------
+
+    // These are all optional (defaults are shown):
+    dir: {
+      input: ".",
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
+    }
   };
 };

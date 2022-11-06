@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>Sitefig - your site sorted</title>
+	<subtitle>Your site sorted</subtitle>
+	
+	<link href="https://sitefig.net/feed/feed.xml" rel="self"/>
+	<link href="https://sitefig.net/"/>
+	<updated>2022-11-05T16:19:42Z</updated>
+	<id>https://sitefig.net/</id>
+	<author>
+		<name></name>
+		<email></email>
+	</author>
+</feed>

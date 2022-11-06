@@ -1,0 +1,26 @@
+---
+layout: layouts/home.njk
+permalink: /news/
+eleventyNavigation:
+  key: "What's new?"
+  order: 1
+---
+
+<div class="pt-4 pb-6">
+<div class="px-3 py-6">
+<h2 class="hero text-center tracking-tight">
+    What's new?
+</h2>
+
+<div class="postlist">
+{% for post in blogposts | news() %}
+  <div class="py-6">
+    <div class="text-gray-800 text-center text-sm pb-3">Posted in /{{post.tags }}/ on {{ post.date | readableDate}}</div>
+    {% include "_includes/partials/h2.njk" %}
+    {% include "_includes/partials/description.njk" %}
+ </div>
+{% endfor %}
+</div>
+
+
+</div></div>

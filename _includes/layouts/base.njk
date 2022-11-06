@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="{{ metadata.language }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or metadata.title }}</title>
+    <meta name="description" content="{{ description or metadata.description }}">
+
+    {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
+    {#- <meta name="generator" content="{{ eleventy.generator }}"> #}
+
+    <link rel="stylesheet" href="{{ '/css/index.css' | url }}">
+    <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}">
+    <link rel="alternate" href="{{ metadata.jsonfeed.path | url }}" type="application/json" title="{{ metadata.title }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+    <link media="all" onload="this.media='all'" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,900;1,700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap">
+  </head>
+  <body class="bg-body text-txt">
+  <div class="bg-primary">
+  <div class="mx-auto md:max-w-2xl py-1">
+    <header class="container mx-auto md:flex md:justify-between">
+      <h1 class="home flex justify-center py-6 ">
+        <a href="{{ '/' | url }}"><img src="/img/logo.svg" class="bg-primary" alt="{{ metadata.title }}"/></a>
+      </h1>
+      <nav class="py-2 md:py-6 px-0 md:px-2"><ul class="nav flex justify-evenly text-secondary" role="list">
+      {%- for entry in collections.all | eleventyNavigation %}
+        <li class="px-1 md:px-2 py-1 nav-item{% if entry.url == page.url %} nav-item-active{% endif %}"><a href="{{ entry.url | url }}">{{ entry.title }}</a></li>
+      {%- endfor %}
+      <li class="px-0 pr-1 inline nav-item">
+      <span class="relative inline-flex">
+            <a href="https://sitefig.eu/" class="inline-flex items-center px-2 py-1 leading-6 text-sm shadow rounded-md text-info bg-white dark:bg-slate-800 transition ease-in-out duration-300">
+              Try it for free
+            </a>
+            <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
+          </span>
+      </li>
+      </ul></nav>
+    </header>
+  </div></div>
+  <main class="md:max-w-2xl mx-auto font-body {% if templateClass %}{{ templateClass }}{% endif %}"">
+      {{ content | safe }}
+  </main>
+
+  <div class="bg-footer md:bg-contain bg-cover bg-bottom bg-no-repeat bg-center">
+    <footer class="container mx-auto pb-44">
+      <div class="text-center bg-body mb-44">
+        <p>You got this far?</p>
+        <p>Need help? <br />
+        Email to <a class="link" href="mailto:support@sitefig.eu">support@sitefig.eu</a></p>
+        <p>This blog is designed by Sitefig</p>
+         <p>Copyright @2022</p>
+      </div>
+    </footer>
+  </div>
+    <!-- Current page: {{ page.url | url }} -->
+</body>
+</html>

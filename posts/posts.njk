@@ -1,0 +1,16 @@
+---
+layout: layouts/post.njk
+templateClass: tmpl-post
+pagination:
+  data: blogposts
+  size: 1
+  alias: post
+permalink: /posts/{{ post.slug }}/index.html
+---
+<div class="pt-4 pb-6">
+<div class="px-3 py-6">
+{% block content  %}
+
+{% endblock %}
+</div>
+</div>

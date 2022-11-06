@@ -1,0 +1,7 @@
+{% set tagline = post.description | head(-1) %}
+<div class="desc mt-5 pt-3">{% for desc in post.description | poplast %}
+<p class="leading-6 text-lg">{{desc}}.</p>
+{% endfor %}
+{% for desc in tagline %}
+<p class="leading-6 text-lg pt-4"><a class="underline text-info" href="/posts/{{post.slug}}" title="{{post.title}}">{{desc}}</a>.</p>
+{% endfor %}</div>

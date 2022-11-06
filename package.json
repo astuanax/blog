@@ -1,50 +1,52 @@
 {
-  "name": "eleventy-starter-ghost",
-  "version": "1.0.0",
-  "description": "A starter template to build websites with Ghost & Eleventy",
-  "main": ".eleventy.js",
+  "name": "eleventy-base-blog",
+  "version": "7.0.0",
+  "description": "A starter repository for a blog web site using the Eleventy static site generator.",
   "scripts": {
-    "start": "yarn run dev",
-    "dev": "cross-env ELEVENTY_ENV=dev eleventy --serve",
-    "build": "cross-env ELEVENTY_ENV=prod eleventy",
-    "test": "yarn run build",
-    "lint": "eslint . --ext .js --cache"
+    "build": "npx @11ty/eleventy",
+    "bench": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+    "watch": "npx @11ty/eleventy --watch",
+    "serve": "npx @11ty/eleventy --serve",
+    "start": "npx @11ty/eleventy --serve",
+    "debug": "DEBUG=* npx @11ty/eleventy",
+    "tailwind": "tailwindcss -i css/index.css -o _site/css/index.css --watch --postcss"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TryGhost/eleventy-starter-ghost.git"
+    "url": "git://github.com/11ty/eleventy-base-blog.git"
   },
-  "keywords": [
-    "eleventy",
-    "ghost",
-    "starter",
-    "boilerplate",
-    "static",
-    "site",
-    "jamstack"
-  ],
-  "author": "David Darnes",
+  "author": {
+    "name": "Zach Leatherman",
+    "email": "zachleatherman@gmail.com",
+    "url": "https://zachleat.com/"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TryGhost/eleventy-starter-ghost/issues"
+    "url": "https://github.com/11ty/eleventy-base-blog/issues"
   },
-  "homepage": "https://github.com/TryGhost/eleventy-starter-ghost#readme",
+  "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "dependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@11ty/eleventy-plugin-rss": "^1.1.1",
-    "@tryghost/content-api": "^1.4.4",
-    "@tryghost/helpers": "^1.1.6",
-    "clean-css": "^4.2.1",
-    "cross-env": "^7.0.0",
-    "dotenv": "^8.0.0",
-    "eleventy-plugin-lazyimages": "liamfiddler/eleventy-plugin-lazyimages",
-    "eleventy-plugin-local-images": "^0.4.0",
-    "eslint-utils": "3.0.0",
-    "html-minifier": "^4.0.0",
-    "yarn": "^1.22.19"
+    "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy-img": "^2.0.1",
+    "@11ty/eleventy-navigation": "^0.3.3",
+    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
+    "a11y.css": "^5.2.0",
+    "axios": "^1.1.2",
+    "luxon": "^2.4.0",
+    "markdown-it": "^13.0.1",
+    "markdown-it-anchor": "^8.6.4",
+    "outdent": "^0.8.0",
+    "sass": "^1.55.0"
   },
   "devDependencies": {
-    "eslint": "7.32.0",
-    "eslint-plugin-ghost": "2.11.0"
+    "autoprefixer": "^10.4.12",
+    "eleventy-plugin-postcss": "^1.0.4",
+    "eleventy-plugin-transformdom": "^1.0.1",
+    "markdown-it-eleventy-img": "^0.9.0",
+    "postcss": "^8.4.18",
+    "postcss-import": "^15.0.0",
+    "tailwind-vertical-rhythm": "^1.2.0",
+    "tailwindcss": "^3.1.8"
   }
 }

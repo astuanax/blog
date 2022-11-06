@@ -1,0 +1,32 @@
+---
+layout: layouts/home.njk
+permalink: /posts/
+eleventyNavigation:
+  key: Blogposts
+  order: 2
+---
+<div class="pt-4 pb-6">
+<div class="px-3 py-6">
+<h2 class="hero text-center tracking-tight">
+    Archive
+</h2>
+
+{% set postsolist = blogposts %}
+<ul class="list-inside py-6">
+{% for post in postsolist | reverse %}
+  <li class="px-3 py-6 hover:bg-blend-multiply hover:shadow-secondary hover:shadow-sm hover:bg-white postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+    {% include "partials/h4.njk" %}
+    {% for desc in post.description | poplast %}
+        <p class="">{{desc}}.</p>
+      {% endfor %}
+      {% for desc in post.description | head(-1) %}
+        <p class="pb-3"><a  title="{{post.title}}" class="text-info hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-info hover:via-secondary hover:to-primary underline" href="/posts/{{post.slug}}">{{desc}}</a>.</p>
+    {% endfor %}
+    <div class="float-none text-gray-800 text-sm pb-6">Posted {% if post.tags.length > 0 %}in /{{post.tags}}/{% endif %} on {{ post.date | readableDate}}</div>
+  </li>
+  </li>
+{% endfor %}
+</ul>
+</div>
+
+</div></div>
