@@ -50,27 +50,27 @@
 <div class="content pt-4 px-4 drop-shadow-xl">
 <p>We received several customer comments, and release v1.1 is the first update with changes reflecting those requests.</p>
 <p>The update focuses on software architecture, performance, bug fixes and two new report pages.</p>
-<h3 id="software-architecture" tabindex="-1">Software architecture <a class="direct-link" href="#software-architecture" aria-hidden="true">#</a></h3>
+<h3 id="software-architecture" tabindex="-1">Software architecture <a class="invisible md:visible direct-link " href="#software-architecture" aria-hidden="true">#</a></h3>
 <p>The Sitefig architecture was built with live updates, allowing 98% uptime.</p>
 <p>At least that is the idea, but we never had a chance to test it.</p>
 <p>Previously we did a lot of updates, which meant downtime, even during the week.</p>
 <p>The previously announced update went well and without any downtime. So we are now confident that we can update the application without interrupting the user experience.</p>
-<h3 id="performance" tabindex="-1">Performance <a class="direct-link" href="#performance" aria-hidden="true">#</a></h3>
+<h3 id="performance" tabindex="-1">Performance <a class="invisible md:visible direct-link " href="#performance" aria-hidden="true">#</a></h3>
 <p>Many pages did not perform very well, and we believe there is still much room for improvement. At least, that is what the Sitefig report is telling us!</p>
 <p>Yes, we used Sitefig on our application to figure out what needed updating. Which network requests were lagging, and which metric was the worst one?</p>
 <p>TTF (Time to first byte) was the worst metric due to heavy queries and inlined images. The updates in this release reduced the TTF by 75%, which made using the application feel much more fluid.</p>
-<h3 id="report-pages" tabindex="-1">Report pages <a class="direct-link" href="#report-pages" aria-hidden="true">#</a></h3>
+<h3 id="report-pages" tabindex="-1">Report pages <a class="invisible md:visible direct-link " href="#report-pages" aria-hidden="true">#</a></h3>
 <p>Two new report pages were made available to the customer:</p>
 <ul>
 <li>Javascript libraries and vulnerabilities,</li>
 <li>and PDF assets.</li>
 </ul>
-<h4 id="javascript-libraries-and-vulnerabilities" tabindex="-1">Javascript libraries and vulnerabilities <a class="direct-link" href="#javascript-libraries-and-vulnerabilities" aria-hidden="true">#</a></h4>
+<h4 id="javascript-libraries-and-vulnerabilities" tabindex="-1">Javascript libraries and vulnerabilities <a class="invisible md:visible direct-link " href="#javascript-libraries-and-vulnerabilities" aria-hidden="true">#</a></h4>
 <p>Around 60% of the websites scanned by Sitefig have at least one library with a known vulnerability. The percentage found at Sitefig is much higher than the result Snyk found when scanning popular websites, which was 37%.</p>
 <p>The most common library loaded is still jQuery, even in 2022. And most of those jQuery versions are pretty old. They have not been forgotten due to legacy functionality packed with WordPress plugins or because it was bundled in a more extensive library and never updated.</p>
-<h4 id="pdf-assets" tabindex="-1">PDF Assets <a class="direct-link" href="#pdf-assets" aria-hidden="true">#</a></h4>
+<h4 id="pdf-assets" tabindex="-1">PDF Assets <a class="invisible md:visible direct-link " href="#pdf-assets" aria-hidden="true">#</a></h4>
 <p>Previously Sitefig did not load any PDf documents and focused only on HTML results. This has changed, and PDF documents are now also loaded and listed.</p>
-<h3 id="what-is-next%3F" tabindex="-1">What is next? <a class="direct-link" href="#what-is-next%3F" aria-hidden="true">#</a></h3>
+<h3 id="what-is-next%3F" tabindex="-1">What is next? <a class="invisible md:visible direct-link " href="#what-is-next%3F" aria-hidden="true">#</a></h3>
 <p>We plan to review some of the reports in the next release and update the UI to match a new plan for Sitefig.</p>
 <p>The following features will be coming as well:</p>
 <ul>
@@ -86,8 +86,14 @@
   </main>
 
   <div class="bg-footer md:bg-contain bg-cover bg-bottom bg-no-repeat bg-center">
-    <footer class="container mx-auto pb-44">
-      <div class="text-center bg-body mb-44">
+    <footer class="pb-64">
+      <div class="container md:max-w-2xl mx-auto flex flex-wrap justify-center">
+        <p class="bg-cyan mb-4 p-6 rounded text-white">
+          <a href="https://www.twitch.tv/sitefig"><img src="/img/TwitchGlitchBlackOps.svg" height="32" width="32" class="inline mr-2" />
+          Meet us on Twitch every Friday at lunch time!</a>
+        </p>
+      </div>
+      <div class="container md:max-w-2xl mx-auto text-center bg-body mb-64">
         <p>You got this far?</p>
         <p>Need help? <br />
         Email to <a class="link" href="mailto:support@sitefig.eu">support@sitefig.eu</a></p>

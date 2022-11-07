@@ -138,7 +138,7 @@ async function getAllBlogposts() {
     }).use(markdownItAnchor, {
       permalink: markdownItAnchor.permalink.ariaHidden({
         placement: "after",
-        class: "direct-link",
+        class: "invisible md:visible direct-link ",
         symbol: "#"
       }),
       level: [1, 2, 3, 4]

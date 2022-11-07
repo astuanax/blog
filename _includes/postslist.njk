@@ -5,12 +5,12 @@
     Posted in /{{post.tags}}/ on {{ post.date | readableDate}}
     </p>
     {% include "./partials/h2.njk" %}
-    <div class="grid grid-rows-1 grid-flow-col gap-4">
-    <div class="col-span-2">
+    <div class="md:grid md:grid-rows-1 md:grid-flow-col md:gap-4">
+    <div class="md:col-span-2">
       {% include "./partials/description.njk" %}
     </div>
     {% if post.image %}
-      <div class="align-middle">{% image post.image.url, post.image.alt %}</div>
+      <div class="mt-5 pt-4 align-middle">{% image post.image.url, post.image.alt %}</div>
     {% endif %}
     </div>
 {% endfor %}

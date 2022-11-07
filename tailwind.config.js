@@ -13,6 +13,7 @@ module.exports = {
         primary: '#F7981E',
         secondary: '#48233C',
         info: '#005FFE',
+        cyan: '#17a2b8',
         gray: {
           100: '#f8f9fa',
           200: "#e9ecef",

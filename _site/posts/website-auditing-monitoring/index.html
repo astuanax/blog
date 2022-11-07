@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitefig - your site sorted</title>
+    <meta name="description" content="Sitefig, your site sorted. Website auditing and monitoring.">
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Sitefig - your site sorted">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Sitefig - your site sorted">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+    <link media="all" onload="this.media='all'" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,900;1,700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap">
+  </head>
+  <body class="bg-body text-txt">
+  <div class="bg-primary">
+  <div class="mx-auto md:max-w-2xl py-1">
+    <header class="container mx-auto md:flex md:justify-between">
+      <h1 class="home flex justify-center py-6 ">
+        <a href="/"><img src="/img/logo.svg" class="bg-primary" alt="Sitefig - your site sorted"/></a>
+      </h1>
+      <nav class="py-2 md:py-6 px-0 md:px-2"><ul class="nav flex justify-evenly text-secondary" role="list">
+        <li class="px-1 md:px-2 py-1 nav-item"><a href="/news/">What&#39;s new?</a></li>
+        <li class="px-1 md:px-2 py-1 nav-item"><a href="/posts/">Blogposts</a></li>
+      <li class="px-0 pr-1 inline nav-item">
+      <span class="relative inline-flex">
+            <a href="https://sitefig.eu/" class="inline-flex items-center px-2 py-1 leading-6 text-sm shadow rounded-md text-info bg-white dark:bg-slate-800 transition ease-in-out duration-300">
+              Try it for free
+            </a>
+            <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
+          </span>
+      </li>
+      </ul></nav>
+    </header>
+  </div></div>
+  <main class="md:max-w-2xl mx-auto font-body tmpl-post"">
+      <div class="pt-4 pb-6">
+<div class="px-3 py-6">
+    <p class="text-gray-800 text-center text-sm">
+    Posted in /tech/ on 07 Nov 2022
+    </p>
+    <h2 class="hero text-center tracking-tight">
+        <a href="website-auditing-monitoring" class="disabled postlist-link">Website monitoring and auditing with Lighthouse </a>
+    </h2>
+</div>
+<div class="content pt-4 px-4 drop-shadow-xl">
+<h3 id="open-source-made-by-google" tabindex="-1">Open-source made by Google <a class="invisible md:visible direct-link " href="#open-source-made-by-google" aria-hidden="true">#</a></h3>
+<p>Lighthouse is an open-source application developed by Google that can evaluate the performance, technical SEO and accessibility of a webpage.</p>
+<p>If you have never heard from Lighthouse, try it yourself.</p>
+<ul>
+<li>Open Chrome, right-click and select &quot;<code>Inspect</code>&quot;.</li>
+<li>Select the &quot; <code>Lighthouse</code> &quot; tab and click &quot;<code>Analyze page load</code>&quot;.</li>
+</ul>
+<p>It will take a minute to finish, and you'll be presented with a list of failed and passed audits.</p>
+<p><picture><source type="image/webp" srcset="/img/ar5SiJFib3-300.webp 300w"><img src="/img/ar5SiJFib3-300.png" width="300" height="300" alt="alt" loading="lazy" decoding="async"></picture></p>
+<p>Lighthouse is part of every Chrome browser, and you can run these audits yourself if you want to and have the time and resources to do so.</p>
+<p>But what if you have 1000+ pages?
+Will you run Lighthouse on each of those?</p>
+<p>Or let's say you have 20 templates?
+Will the developer test each template and some reference pages with it?</p>
+<p>Most development teams will need more time to run these tests.
+And I am sure managers prefer expensive developers to focus on other tasks.
+Right?</p>
+<p>Sitefig uses Lighthouse to audit and monitors all pages on your website using both standard and custom audits.</p>
+<h3 id="custom-audit-accessibility" tabindex="-1">Custom audit accessibility <a class="invisible md:visible direct-link " href="#custom-audit-accessibility" aria-hidden="true">#</a></h3>
+<p>Accessibility is one of those custom audits because the standard Lighthouse runs only a limited set of audits.</p>
+<p>Our Accessibility audit covers the latest in open-source technology, which we complement with a list of other accessibility issues ranging from identifying emojis to CSS issues that affect accessibility.</p>
+<p>Sitefig also stores screenshots of how the website looks for people with limited vision and color-blindness.
+<picture><source type="image/webp" srcset="/img/Ym_p-Hvmfv-300.webp 300w"><img src="/img/Ym_p-Hvmfv-300.png" width="300" height="300" alt="alt" loading="lazy" decoding="async"></picture></p>
+<h3 id="custom-audit-for-broken-links" tabindex="-1">Custom audit for broken links <a class="invisible md:visible direct-link " href="#custom-audit-for-broken-links" aria-hidden="true">#</a></h3>
+<p>To ensure Sitefig finds all potential links, we drill deep into the code and HTTP headers to find all likely URLs available on your website.</p>
+<p>Once we have a list of URLs available on your website, all these are verified and retrieved. The broken link check includes audits for broken SSL/TLS certificates, missing DNS, and invalid URL syntax.</p>
+<h3 id="standard-performance-audit" tabindex="-1">Standard Performance audit <a class="invisible md:visible direct-link " href="#standard-performance-audit" aria-hidden="true">#</a></h3>
+<p>The Core web metrics recorded by Lighthouse are lab results based on an actual browser with 1 CPU and 1.5 Gb available memory. The metrics are based on the same hardware and network throughput baseline. That way, Sitefig can reliably compare results between pages and between websites using, avoiding fluctuating real-world conditions.</p>
+<p><picture><source type="image/webp" srcset="/img/ESvqbxQfMi-300.webp 300w"><img src="/img/ESvqbxQfMi-300.png" width="300" height="300" alt="alt" loading="lazy" decoding="async"></picture></p>
+<p>Besides the lab results, Sitefig also pulls all the real-world data from Google and analyses it to see which pages perform and which do not.</p>
+<h3 id="lighthouse-is-a-core-part-of-sitefig." tabindex="-1">Lighthouse is a core part of Sitefig. <a class="invisible md:visible direct-link " href="#lighthouse-is-a-core-part-of-sitefig." aria-hidden="true">#</a></h3>
+<p>The Lighthouse application is a core part of our crawler and auditing infrastructure.</p>
+<p>It records performance metrics, identifies privacy issues around trackers and cookies, and allows slow-level access to any part of the code of a webpage.</p>
+<p>It is used with standard and custom audits and is loaded using a real browser, Chromium, using the same resources for each run.</p>
+<p>In total, Sitefig runs over 300 audits on each page and website. Allowing the developer to focus on what they do best and leave out the routine checks to Sitefig.</p>
+
+</div>
+</div>
+
+  </main>
+
+  <div class="bg-footer md:bg-contain bg-cover bg-bottom bg-no-repeat bg-center">
+    <footer class="pb-64">
+      <div class="container md:max-w-2xl mx-auto flex flex-wrap justify-center">
+        <p class="bg-cyan mb-4 p-6 rounded text-white">
+          <a href="https://www.twitch.tv/sitefig"><img src="/img/TwitchGlitchBlackOps.svg" height="32" width="32" class="inline mr-2" />
+          Meet us on Twitch every Friday at lunch time!</a>
+        </p>
+      </div>
+      <div class="container md:max-w-2xl mx-auto text-center bg-body mb-64">
+        <p>You got this far?</p>
+        <p>Need help? <br />
+        Email to <a class="link" href="mailto:support@sitefig.eu">support@sitefig.eu</a></p>
+        <p>This blog is designed by Sitefig</p>
+         <p>Copyright @2022</p>
+      </div>
+    </footer>
+  </div>
+    <!-- Current page: /posts/website-auditing-monitoring/ -->
+</body>
+</html>
