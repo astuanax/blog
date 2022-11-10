@@ -621,24 +621,16 @@ h4{
   margin-bottom: 1rem;
 }
 
-.mb-44{
-  margin-bottom: 11rem;
-}
-
-.mt-5{
-  margin-top: 1.25rem;
-}
-
-.mb-8{
-  margin-bottom: 2rem;
-}
-
 .mr-2{
   margin-right: 0.5rem;
 }
 
 .mb-64{
   margin-bottom: 16rem;
+}
+
+.mt-5{
+  margin-top: 1.25rem;
 }
 
 .inline{
@@ -763,11 +755,6 @@ h4{
   background-color: rgb(23 162 184 / var(--tw-bg-opacity));
 }
 
-.bg-info{
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 95 254 / var(--tw-bg-opacity));
-}
-
 .bg-footer{
   background-image: url('/img/wasp-cloud.png');
 }
@@ -836,8 +823,8 @@ h4{
   padding-right: 0.25rem;
 }
 
-.pb-44{
-  padding-bottom: 11rem;
+.pb-64{
+  padding-bottom: 16rem;
 }
 
 .pt-4{
@@ -858,10 +845,6 @@ h4{
 
 .pb-3{
   padding-bottom: 0.75rem;
-}
-
-.pb-64{
-  padding-bottom: 16rem;
 }
 
 .text-center{
