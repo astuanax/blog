@@ -13,7 +13,7 @@ eleventyNavigation:
 </h2>
 
 <div class="postlist">
-{% for post in blogposts | news() %}
+{% for post in blogposts | reverse| news() %}
   <div class="py-6">
     <div class="text-gray-800 text-center text-sm pb-3">Posted in /{{post.tags }}/ on {{ post.date | readableDate}}</div>
     {% include "_includes/partials/h2.njk" %}
