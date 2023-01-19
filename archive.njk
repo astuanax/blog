@@ -17,7 +17,7 @@ eleventyNavigation:
   <li class="px-3 py-6 hover:bg-blend-multiply hover:shadow-secondary hover:shadow-sm hover:bg-white postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
     {% include "partials/h4.njk" %}
     {% for desc in post.description | poplast %}
-        <p class="">{{desc}}.</p>
+        <p>{{desc}}.</p>
       {% endfor %}
       {% for desc in post.description | head(-1) %}
         <p class="pb-3"><a  title="{{post.title}}" class="text-info hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-info hover:via-secondary hover:to-primary underline" href="/posts/{{post.slug}}">{{desc}}</a>.</p>
