@@ -1,0 +1,4 @@
+Sitemap: https://www.sitefig.net/sitemap.xml
+
+User-agent: *
+Disallow:
