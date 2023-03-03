@@ -17,15 +17,16 @@ More blogposts from the archive
 {% set postsolist = blogposts | poplast %}
 <ul class="list-inside py-6">
 {% for post in postsolist | reverse %}
-  <li class="px-3 py-6 hover:bg-blend-multiply hover:shadow-secondary hover:shadow-sm hover:bg-white postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-    {% include "partials/h4.njk" %}
+  <li class="md:max-w-3xl prose-lg prose bg-white mb-6 px-3 py-6 border-b-2 border-gray-200 postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+    <article>{% include "partials/h4.njk" %}
     {% for desc in post.description | poplast %}
         <p>{{desc}}.</p>
       {% endfor %}
       {% for desc in post.description | head(-1) %}
         <p class="pb-3"><a  title="{{post.title}}" class="text-info hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-info hover:via-secondary hover:to-primary underline" href="/posts/{{post.slug}}">{{desc}}</a>.</p>
     {% endfor %}
-    <div class="float-none text-gray-800 text-sm pb-6">Posted {% if post.tags.length > 0 %}in /{{post.tags}}/{% endif %} on {{ post.date | readableDate}}</div>
+    <p class="float-none text-gray-800 text-sm pb-6"><small>Posted {% if post.tags.length > 0 %}in /{{post.tags}}/{% endif %} on {{ post.date | readableDate}}</small></p>
+    </article>
   </li>
   </li>
 {% endfor %}

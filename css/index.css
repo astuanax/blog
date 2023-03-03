@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,11 +12,13 @@ html {
     @apply text-4xl;
     @apply md:text-6xl;
   }
+
   h3 {
-    @apply text-2xl;
+    /*@apply text-2xl;*/
   }
+
   h4 {
-    @apply text-xl;
+    /*@apply text-xl;*/
   }
 }
 
@@ -32,46 +33,49 @@ body, div {
 }
 
 .postlist-item:hover a.tag {
-    @apply text-info;
+  @apply text-info;
 }
 
 .content {
   @apply bg-white;
-  @apply pb-2;
+  /*@apply pb-2;*/
 }
 
 .content p {
-    @apply pb-2;
+  /*@apply pb-2;*/
 }
+
 .content h3 {
   @apply font-semibold;
-  @apply tracking-tight;
-  @apply pt-4;
-  @apply pb-2;
+  /*@apply tracking-tight;*/
+  /*@apply pt-4;*/
+  /*@apply pb-2;*/
 }
 
 h2, h3 {
   color: #27111b;
   font-weight: 900;
 }
+
 h1, h2, h3, h4, h1 a, h2 a, h3 a, h4 a {
   @apply font-sans;
 }
+
 p {
   font-weight: 400 !important;
 }
 
 .content h4 {
-  @apply tracking-tight;
-  @apply pt-1;
-  @apply pb-3;
+  /*@apply tracking-tight;*/
+  /*@apply pt-1;*/
+  /*@apply pb-3;*/
 }
 
 .content ul {
-  @apply list-disc;
-  @apply list-inside;
-  @apply pt-1;
-  @apply pb-3;
+  /*@apply list-disc;*/
+  /*@apply list-inside;*/
+  /*@apply pt-1;*/
+  /*@apply pb-3;*/
 }
 
 .content a, .link {
@@ -82,11 +86,23 @@ p {
 
 
 .content p {
-  @apply pt-8;
+  /*@apply pt-8;*/
   @apply subpixel-antialiased;
   @apply tracking-tight;
-  @apply leading-7;
+  /*@apply leading-7;*/
 }
+
 .content p + ul, .content p:first-child {
-  @apply pt-0;
+  /*@apply pt-0;*/
+}
+
+
+.skip-link {
+  position: absolute;
+  transform: translateY(-100%);
+  background:white;
+}
+
+.skip-link:focus {
+  transform: translateY(0%);
 }

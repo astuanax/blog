@@ -40,6 +40,7 @@
     "sass": "^1.55.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.12",
     "eleventy-plugin-postcss": "^1.0.4",
     "eleventy-plugin-transformdom": "^1.0.1",
