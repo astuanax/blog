@@ -1,5 +1,7 @@
 ---
 layout: layouts/home.njk
+eleventyComputed:
+  canonical: "https://www.sitefig.net/posts/{{ post.slug }}/index.html"
 ---
 {% set maxPosts = collections.posts.length | min(3) %}
 
