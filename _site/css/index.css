@@ -1285,14 +1285,6 @@ h4 {
   margin-right: -0.25rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
 .mb-64 {
   margin-bottom: 16rem;
 }
@@ -1356,10 +1348,6 @@ h4 {
   list-style-position: inside;
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
 .items-center {
   align-items: center;
 }
@@ -1378,10 +1366,6 @@ h4 {
 
 .rounded-full {
   border-radius: 9999px;
-}
-
-.rounded {
-  border-radius: 0.25rem;
 }
 
 .border-r-2 {
@@ -1404,6 +1388,11 @@ h4 {
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(233 236 239 / var(--tw-border-opacity));
+}
+
+.border-secondary {
+  --tw-border-opacity: 1;
+  border-color: rgb(72 35 60 / var(--tw-border-opacity));
 }
 
 .bg-body {
@@ -1431,11 +1420,6 @@ h4 {
   background-color: rgb(14 165 233 / var(--tw-bg-opacity));
 }
 
-.bg-cyan {
-  --tw-bg-opacity: 1;
-  background-color: rgb(23 162 184 / var(--tw-bg-opacity));
-}
-
 .bg-footer {
   background-image: url('/img/wasp-cloud.png');
 }
@@ -1454,10 +1438,6 @@ h4 {
 
 .bg-no-repeat {
   background-repeat: no-repeat;
-}
-
-.p-6 {
-  padding: 1.5rem;
 }
 
 .py-1 {
@@ -1528,6 +1508,10 @@ h4 {
   padding-bottom: 0.75rem;
 }
 
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1571,11 +1555,6 @@ h4 {
 .text-info {
   --tw-text-opacity: 1;
   color: rgb(0 95 254 / var(--tw-text-opacity));
-}
-
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-gray-800 {
@@ -1666,12 +1645,6 @@ h1,  h2,  h3,  h4,  h1 a,  h2 a,  h3 a,  h4 a {
 
 p {
   font-weight: 400 !important;
-}
-
-.content h4 {
-  /*@apply tracking-tight;*/
-  /*@apply pt-1;*/
-  /*@apply pb-3;*/
 }
 
 .content ul {

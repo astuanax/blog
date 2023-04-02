@@ -65,11 +65,7 @@ p {
   font-weight: 400 !important;
 }
 
-.content h4 {
-  /*@apply tracking-tight;*/
-  /*@apply pt-1;*/
-  /*@apply pb-3;*/
-}
+
 
 .content ul {
   /*@apply list-disc;*/

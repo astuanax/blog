@@ -8,24 +8,24 @@ layout: layouts/home.njk
 {% include "postslist.njk" %}
 </div>
 
-<div class="pt-3">
-<h3 class="text-center text-primary tracking-tight border-r-2 border-l-2 border-primary bg-white pl-2 ">
-More blogposts from the archive
+<div class="px-3 py-6 text-primary tracking-tight border-r-2 border-l-2 border-primary bg-white pl-2">
+<h3 class="text-center text-primary bg-white">
+Previous posts from the archive
 </h3>
 </div>
 <div class="container mx-auto">
 {% set postsolist = blogposts | poplast %}
 <ul class="list-inside py-6">
 {% for post in postsolist | reverse %}
-  <li class="md:max-w-3xl prose-lg prose bg-white mb-6 px-3 py-6 border-b-2 border-gray-200 postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-    <article>{% include "partials/h4.njk" %}
+  <li class="md:max-w-3xl prose-lg prose bg-white mb-6 px-3 pb-3 pt-6 border-b-2 border-gray-200 postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+    <article><div class="pb-3">{% include "partials/h3.njk" %}</div>
     {% for desc in post.description | poplast %}
         <p>{{desc}}.</p>
       {% endfor %}
       {% for desc in post.description | head(-1) %}
-        <p class="pb-3"><a  title="{{post.title}}" class="text-info hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-info hover:via-secondary hover:to-primary underline" href="/posts/{{post.slug}}">{{desc}}</a>.</p>
+        <p><a  title="{{post.title}}" class="text-info hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-info hover:via-secondary hover:to-primary underline" href="/posts/{{post.slug}}">{{desc}}</a>.</p>
     {% endfor %}
-    <p class="float-none text-gray-800 text-sm pb-6"><small>Posted {% if post.tags.length > 0 %}in /{{post.tags}}/{% endif %} on {{ post.date | readableDate}}</small></p>
+    <p class="float-none text-gray-800 text-sm"><small>Posted {% if post.tags.length > 0 %}in /{{post.tags}}/{% endif %} on {{ post.date | readableDate}}</small></p>
     </article>
   </li>
   </li>
