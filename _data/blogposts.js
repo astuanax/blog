@@ -3,6 +3,7 @@ const Image = require("@11ty/eleventy-img");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItEleventyImg = require("markdown-it-eleventy-img");
+const fs = require('fs');
 
 
 const imageShortcode = (
@@ -161,18 +162,23 @@ async function getAllBlogposts() {
       }, renderImage(image, attributes) {
         const [src, attrs] = attributes;
         try {
-          cacheImage(src, [300,600])
-        } catch (e){
+          cacheImage(src, [300, 600])
+        } catch (e) {
           // console.error(e)
         }
-        const picture = imageShortcode("http://localhost:1337" + src, "alt", Number(attrs.width),Number(attrs.height))
+        const picture = imageShortcode("http://localhost:1337" + src, "alt", Number(attrs.width), Number(attrs.height))
         // console.log({picture})
         return picture
       }
     });
 
     const html = md.render(item.attributes.content)
-
+    const filename = item.attributes.slug
+    try {
+      fs.writeFileSync(filename + ".md", md.toString());
+    } catch (e) {
+      throw e
+    }
 
     return {
       id: item.id,
