@@ -6,6 +6,14 @@ const markdownItEleventyImg = require("markdown-it-eleventy-img");
 const fs = require('fs');
 
 
+function getImage(url) {
+  return axios
+    .get(url, {
+      responseType: 'arraybuffer'
+    })
+    .then(response => Buffer.from(response.data, 'binary'))
+}
+
 const imageShortcode = (
   src,
   alt,
@@ -168,6 +176,14 @@ async function getAllBlogposts() {
         }
         const picture = imageShortcode("http://localhost:1337" + src, "alt", Number(attrs.width), Number(attrs.height))
         // console.log({picture})
+        const img = getImage("http://localhost:1337" + src).then(
+          buff => {
+            console.log(src)
+            console.log(buff)
+            fs.writeFileSync("/mnt/sda/github/blog" + src, buff)
+
+          }
+        )
         return picture
       }
     });
@@ -191,9 +207,26 @@ async function getAllBlogposts() {
       }
     };
     try {
-      fs.writeFileSync(filename + ".md", JSON.stringify(p));
+      fs.writeFileSync(filename + ".json", JSON.stringify(p));
     } catch (e) {
       throw e
+    }
+    try {
+      console.log(p.image.url)
+      if (p.image.url) {
+        const img = getImage(p.image.url).then(
+          buff => {
+            console.log(item.attributes.image.data.attributes.url)
+            console.log(buff)
+            fs.writeFileSync("/mnt/sda/github/blog" + item.attributes.image.data.attributes.url, buff)
+
+          }
+        )
+
+      }
+
+    } catch (e) {
+
     }
     return p
   });
