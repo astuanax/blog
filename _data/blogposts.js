@@ -174,13 +174,9 @@ async function getAllBlogposts() {
 
     const html = md.render(item.attributes.content)
     const filename = item.attributes.slug
-    try {
-      fs.writeFileSync(filename + ".md", md.toString());
-    } catch (e) {
-      throw e
-    }
 
-    return {
+
+    const p=  {
       id: item.id,
       title: item.attributes.title,
       description: item.attributes.description.split(". "),
@@ -194,6 +190,12 @@ async function getAllBlogposts() {
         alt: "alt txt"
       }
     };
+    try {
+      fs.writeFileSync(filename + ".md", JSON.stringify(p));
+    } catch (e) {
+      throw e
+    }
+    return p
   });
 
   // return formatted blogposts
